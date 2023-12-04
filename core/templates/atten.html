@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>attendance</title>
+    <style>
+            body{
+                background: #F4F6F9;
+            }
+        form{
+            background: white;
+            padding: 20px 50px;
+            margin: 20px 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px black;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        form div{
+            display: flex;
+            justify-content: space-between;
+        }
+        input[type=submit]{
+            background: #28A745;
+            border: 0;
+            outline: 0;
+            padding: 20px 50px;
+            color: white;
+            font-weight: 500;
+            font-size: 24px;
+            box-shadow: 0 0 5px black;
+            border-radius: 4px;
+        }
+        input[type=submit]:hover{
+            background-color:#28a746bf ;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {% for i in data %}
+        <div>
+            <label for="{{i.name}}">{{i.name}}</label>
+            <input {% if i.ch %} checked {% endif %} type="checkbox" name="{{i.name}}" id="{{i.name}}" value="{{i.name}}">
+        </div>
+        <br>
+
+        {% endfor %}
+        <input type="submit" value="Save" />
+    </form>
+</body>
+</html>
