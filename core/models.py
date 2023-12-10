@@ -268,7 +268,7 @@ class Student(models.Model):
       
       <script>
       linkss = document.querySelector("a.man");
-      console.log(linkss)
+
       ''' +mark_safe('''
           
           linkss.addEventListener('click', ()=>{

@@ -108,7 +108,7 @@ def attend_grid(req, pk):
             if f"{date_by_num} - {date_by_num.strftime('%A')}" in ds:
               ch = True
             if date_by_num.strftime('%A') in if_in:
-              student_list.append({"name": sentance , 'ch':ch})
+              student_list.append({"name": sentance , 'ch':ch, })
 
             
             if end_date == date_by_num:
@@ -124,7 +124,7 @@ def attend_grid(req, pk):
 
                 returned_date.append([p])
 
-              returned_date.append([student_list, s.student.name])
+              returned_date.append([student_list, s.student.name, s.student.pk])
               break
           
           except ValueError:

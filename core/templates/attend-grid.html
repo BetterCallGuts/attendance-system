@@ -103,8 +103,19 @@
                         
                         <div class="el" style="border: 1px solid black;min-width: 80px;">
                             <span>
-                                {{d.1}}
-                                {% comment %} {{d.name}} {% endcomment %}
+                                <style>
+                                    a.bla:hover{
+                                        transform: scale(1.1);
+                                    }
+                                    a.bla{
+                                        transition: .4s transform;
+                                    }
+                                </style>
+                                <a href="/admin/core/student/{{d.2}}" target="popup" class="bla" style="text-decoration: none;" >
+                                    {{d.1}}
+                                </a>
+                                
+                                
 
                             </span>
                             
@@ -124,7 +135,7 @@
                                 name="{{l.name}}${{d.1}}"
 
                                 >
-                                {% comment %} {{d.name}} {% endcomment %}
+
                             </span>
                             
 
@@ -143,6 +154,17 @@
         
         <input type="submit" value="Save" />
     </form>
+
+    <script>
+        bbb = document.querySelectorAll('a.bla');
+        // console.log(bbb)
+        
+        for ( l of bbb) {
+            console.log(l.innerHTML)
+            l.addEventListener("click",()=>{
+                window.open(l.getAttribute("href"), 'popup','width=400,height=400'); return false; });
+        }
+    </script>
 
 </body>
 </html>
