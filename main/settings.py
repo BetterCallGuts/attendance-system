@@ -4,10 +4,12 @@ from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 SECRET_KEY = 'django-insecure-2yni_ljr%p4w@ajlv#&ej9hmub$h9_$h5=9#(nrkn@mbj(b5*e'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',
@@ -16,9 +18,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
-    # ''
-]
+    'core',
+    "import_export"
+
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +52,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'main.wsgi.application'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -71,7 +75,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'en-us'
-
+import os
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -79,4 +83,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "staticdirs")
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "rootfolder")
+
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

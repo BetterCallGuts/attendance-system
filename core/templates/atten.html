@@ -44,7 +44,10 @@
         {% for i in data %}
         <div>
             <label for="{{i.name}}">{{i.name}}</label>
-            <input {% if i.ch %} checked {% endif %} type="checkbox" name="{{i.name}}" id="{{i.name}}" value="{{i.name}}">
+            <input 
+            {% if i.ch %} checked {% endif %} 
+            
+            type="checkbox" name="{{i.name}}" id="{{i.name}}" value="{{i.name}}">
         </div>
         <br>
 

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>attendance</title>
+    <style>
+            
+        form{
+            background: white;
+            padding: 50px;
+            margin: 20px ;
+            width: 80vw;
+            /* padding-left: 200px; */
+
+
+            /* box-shadow: 0 0 10px black; */
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            
+        }
+        form div{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+
+        }
+        input[type=submit]{
+            background: #28A745;
+            border: 0;
+            outline: 0;
+            padding: 20px 50px;
+            color: white;
+            font-weight: 500;
+            font-size: 24px;
+            box-shadow: 0 0 5px black;
+            border-radius: 4px;
+        }
+        input[type=submit]:hover{
+            background-color:#28a746bf ;
+        }   
+
+        
+        div.days{
+        width: fit-content;
+        }
+
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <section class="table">
+               
+        {% for i in data %}
+              {% if forloop.counter == 1 %}
+              <div class="days" style="display: flex;font-size: .7rem;">
+
+                  {% for day in   i.0 %}
+                    {% if forloop.counter == 1 %}
+                      
+                    <div style="border: 1px solid black;min-width: 80px;">
+                        <span>
+
+                            student_names
+                        </span>
+                    </div>
+                    <div class="el" style="border: 1px solid black;min-width: 80px;">
+                        <span>
+                            
+                        {{day}}
+                    </span>
+                    </div>
+                    {% else %}
+                    <div class="el" style="border: 1px solid black;min-width: 80px;">
+                        <span>
+                            
+                        {{day}}
+                            
+                    </span>
+                </div>
+                {% endif %}
+                  
+                  {% endfor %}
+                </div>
+              
+                {% else %}
+                
+                
+                {% endif %}
+
+          {% endfor %}
+
+          {% for d in stu %}
+          <div class="days" style="display: flex;font-size: .7rem;">
+                
+               
+                
+                
+                        
+                        
+                        <div class="el" style="border: 1px solid black;min-width: 80px;">
+                            <span>
+                                {{d.1}}
+                                {% comment %} {{d.name}} {% endcomment %}
+
+                            </span>
+                            
+                            
+                        </div>
+
+                {% for l in d.0 %}
+                
+
+                
+                    
+                        <div class="el" style="border: 1px solid black;min-width: 80px;">
+                            <span>
+                                
+                                <input {% if l.ch %} checked {% endif %} type="checkbox"
+                                value="{{d.1}}"
+                                name="{{l.name}}${{d.1}}"
+
+                                >
+                                {% comment %} {{d.name}} {% endcomment %}
+                            </span>
+                            
+
+                            
+
+                        </div>
+                        
+                    {% endfor %}
+                        
+                        
+                       
+                </div>
+                    {% endfor %}
+
+        </section>
+        
+        <input type="submit" value="Save" />
+    </form>
+
+</body>
+</html>

@@ -3,10 +3,11 @@ import datetime
 from django.utils.html  import mark_safe
 from django.urls import reverse
 
+
 class StudentCourseRel(models.Model):
   student = models.ForeignKey('Student',on_delete=models.CASCADE)
   course  = models.ForeignKey('Course', on_delete=models.CASCADE)
-  attend    = models.TextField( null=True, blank=True)
+  attend  = models.TextField( null=True, blank=True)
 
   def __str__(self):
     return f"{self.student.name}"
@@ -89,7 +90,11 @@ class  Course(models.Model):
   # 
   def __str__(self):
     return f"{self.coden}"
-
+  def student_in_course(self):
+    my_cours = StudentCourseRel.objects.filter(course=self)
+    
+    return f"{len(my_cours)}"
+  # 
   # 
   def save(self):
     super().save()
@@ -139,7 +144,17 @@ class  Course(models.Model):
 
       super().save_model(request, obj, form, changed)
   # 
-  
+  def attending_table(self):
+    
+    
+    return mark_safe(f'''
+                     <a target="popup" href="{reverse("attend-grid", args=[self.pk])}" class='sp'>View attendants</a>
+                     '''+'''
+                     <script> 
+                      mylink = document.querySelector("a.sp");
+                      mylink.addEventListener('click', ()=>{
+                      window.open(mylink.getAttribute("href"), 'popup','width=600,height=600'); return false; 
+          }) </script>''')
   
   
 
@@ -199,7 +214,7 @@ class Student(models.Model):
         student=self,
         course=i,
         
-        )
+        ) 
       x.save()
 
     
@@ -243,6 +258,33 @@ class Student(models.Model):
   
   def __str__(self):
     return f"{self.name}"
+  
+  
+  def add_data_from_excel(self):
+    try:
+      
+      data = f'''
+      <a href="{reverse("excel", args=[self.pk])}" target="popup" class='man'>Add data from excel?</a>
+      
+      <script>
+      linkss = document.querySelector("a.man");
+      console.log(linkss)
+      ''' +mark_safe('''
+          
+          linkss.addEventListener('click', ()=>{
+              window.open(linkss.getAttribute("href"), 'popup','width=600,height=600'); return false; 
+          }) 
+
+            </script>
+      ''')
+      return mark_safe(data)
+    except:
+      
+      # print("Except happens")
+      data = f'''
+    <h5>Set up the data to unlock this option</h5>
+      '''
+      return mark_safe(data)
   
   def Attnder(self):
     my_ = StudentCourseRel.objects.filter(student=self)
